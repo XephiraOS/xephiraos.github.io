@@ -23,10 +23,6 @@
 </head>
 <body>
 
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
-    <div class="ambient-glow-3"></div>
-
     <!-- ─── FLOATING LIQUID GLASS NAVBAR ─── -->
     <div class="navbar-wrapper">
         <nav class="liquid-glass navbar" id="mainNavbar">
@@ -44,6 +40,11 @@
             </ul>
 
             <div class="nav-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Night/Light theme">
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-icon">🌙</span>
+                    <span class="theme-toggle-pill"></span>
+                </button>
                 <a href="downloads.html" class="liquid-btn liquid-btn-primary" style="padding: 9px 20px; font-size: 13.5px;">
                     Get XephiraOS ↓
                 </a>
@@ -100,8 +101,13 @@
                 </div>
             </div>
 
-            <!-- Interactive 3D Phone Mockup Showcase -->
+            <!-- Interactive 3D Phone Mockup Showcase with Settings Home & About Phone -->
             <div class="hero-phone-wrap">
+                <div class="phone-mode-switcher">
+                    <button class="phone-mode-btn active" id="phoneTabSettings">⚙️ Settings Home</button>
+                    <button class="phone-mode-btn" id="phoneTabAbout">✨ About Phone</button>
+                </div>
+
                 <div class="phone-mockup" id="heroPhone">
                     <div class="mockup-header">
                         <span>09:41</span>
@@ -109,74 +115,218 @@
                     </div>
 
                     <div class="mockup-screen-container">
-                        <!-- Kyant0 Parameter Indicator Badges -->
-                        <div style="display: flex; justify-content: space-between; gap: 4px;">
-                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Refraction: 20dp</span>
-                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Amount: -60dp</span>
-                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Bleed: 0.00</span>
+                        <!-- VIEW 1: SETTINGS HOME -->
+                        <div class="phone-view active" id="phoneViewSettings">
+                            <!-- Search Bar -->
+                            <div class="phone-search-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <span>Search settings, apps...</span>
+                            </div>
+
+                            <!-- Hero About Card (tap switches to about phone) -->
+                            <div class="phone-about-card" id="heroPhoneAboutCard" title="Tap to view About Phone">
+                                <div class="phone-about-logo">
+                                    <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira">
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">XephiraOS 1.0</div>
+                                    <div style="font-size: 10.5px; color: #94a3b8;">Android 16 • Pixel 9 Pro XL</div>
+                                </div>
+                                <span class="phone-chevron">›</span>
+                            </div>
+
+                            <!-- Status Pills -->
+                            <div class="phone-status-pills">
+                                <div class="phone-status-pill">
+                                    <div class="phone-status-val">Active</div>
+                                    <div class="phone-status-lbl">Wi-Fi</div>
+                                </div>
+                                <div class="phone-status-pill">
+                                    <div class="phone-status-val">92%</div>
+                                    <div class="phone-status-lbl">Battery</div>
+                                </div>
+                                <div class="phone-status-pill">
+                                    <div class="phone-status-val">184 GB</div>
+                                    <div class="phone-status-lbl">Free</div>
+                                </div>
+                            </div>
+
+                            <!-- Category 1: Connectivity -->
+                            <div class="phone-category-card">
+                                <div class="phone-category-header">Connectivity</div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">📶</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Network & internet</div>
+                                        <div class="phone-category-sub">Mobile, Wi-Fi, hotspot, SIMs</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">🎧</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Connected devices</div>
+                                        <div class="phone-category-sub">Bluetooth, pairing, Quick Share</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                            </div>
+
+                            <!-- Category 2: Device Essentials -->
+                            <div class="phone-category-card">
+                                <div class="phone-category-header">Device Essentials</div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">⚡</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Battery</div>
+                                        <div class="phone-category-sub">92% • Adaptive battery enabled</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">💾</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Storage</div>
+                                        <div class="phone-category-sub">184 GB free of 256 GB</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">🔊</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Sound & vibration</div>
+                                        <div class="phone-category-sub">Volume, haptics, Do Not Disturb</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                            </div>
+
+                            <!-- Category 3: Personalization -->
+                            <div class="phone-category-card">
+                                <div class="phone-category-header">Personalization</div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">☀️</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Display & Optics</div>
+                                        <div class="phone-category-sub">Kyant0 Liquid Glass, 120Hz refresh</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">🎨</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Wallpaper & style</div>
+                                        <div class="phone-category-sub">White Glass theme, themed icons</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                            </div>
+
+                            <!-- Category 4: Security & About -->
+                            <div class="phone-category-card">
+                                <div class="phone-category-header">System & About</div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-icon">🛡️</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Security & biometrics</div>
+                                        <div class="phone-category-sub">Screen lock, fingerprint, SELinux</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item" onclick="setPhoneView('about')">
+                                    <div class="phone-category-icon">✨</div>
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">About phone</div>
+                                        <div class="phone-category-sub">XephiraOS 1.0 • Pixel 9 Pro XL</div>
+                                    </div>
+                                    <span class="phone-chevron">›</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Kyant0 Floating Optical Convex Lens (Live Refractor) -->
-                        <div class="kyant-floating-lens" id="kyantFloatingLens">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira" style="width: 24px; height: 24px; filter: drop-shadow(0 2px 6px rgba(255,255,255,0.6));">
-                                    <strong style="font-size: 13.5px; color: #ffffff;">XephiraOS 1.0</strong>
+                        <!-- VIEW 2: ABOUT PHONE -->
+                        <div class="phone-view" id="phoneViewAbout">
+                            <div class="about-subpage-header">
+                                <button class="about-back-btn" id="aboutBackBtn" aria-label="Back to Settings">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                </button>
+                                <span style="font-size: 14px; font-weight: 700; color: #ffffff;">About phone</span>
+                            </div>
+
+                            <!-- Emblem & Version Card -->
+                            <div class="about-hero-glass-card">
+                                <div class="about-logo-wrapper">
+                                    <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira Emblem">
                                 </div>
-                                <span class="liquid-pill liquid-pill-green" style="font-size: 9px; padding: 2px 8px;">KYANT0 LENS</span>
-                            </div>
-                            <p style="font-size: 11px; color: rgba(255,255,255,0.95); line-height: 1.45;">
-                                SDF Meniscus convex curvature bending fluid background waves in real time.
-                            </p>
-                        </div>
-
-                        <!-- Kyant0 Sliders Controls Panel (from catalog_app.jpg) -->
-                        <div class="liquid-glass-subtle" style="padding: 14px 16px; border-radius: 24px;">
-                            <div style="font-size: 11px; font-weight: 800; color: #ffffff; margin-bottom: 10px; letter-spacing: 0.8px; text-transform: uppercase;">
-                                Kyant0 Backdrop Controls
-                            </div>
-                            
-                            <div class="kyant-slider-row">
-                                <div class="kyant-slider-label">
-                                    <span>Corner radius</span>
-                                    <span id="labelRadius">28 dp</span>
+                                <img src="assets/xephira_logotype_text.png" alt="Xephira" style="height: 18px; object-fit: contain; margin-bottom: 6px; filter: drop-shadow(0 2px 6px rgba(255,255,255,0.4));">
+                                <div style="font-size: 16px; font-weight: 700; color: #ffffff;">XephiraOS 1.0</div>
+                                <div style="font-size: 11px; color: #cbd5e1; margin-top: 2px; margin-bottom: 10px;">Android 16 • Official Release</div>
+                                <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(74, 222, 128, 0.15); border: 1px solid rgba(74, 222, 128, 0.4); padding: 3px 12px; border-radius: 999px; font-size: 10px; font-weight: 600; color: #4ade80;">
+                                    <span style="width: 5px; height: 5px; border-radius: 50%; background: #4ade80;"></span>
+                                    <span>OFFICIAL • BAKLAVA</span>
                                 </div>
-                                <input type="range" min="8" max="44" value="28" class="kyant-range-input" id="sliderRadius">
                             </div>
 
-                            <div class="kyant-slider-row">
-                                <div class="kyant-slider-label">
-                                    <span>Blur radius</span>
-                                    <span id="labelBlur">28 dp</span>
+                            <!-- 2x2 Specs Grid -->
+                            <div class="about-specs-grid">
+                                <div class="about-spec-box">
+                                    <div style="font-size: 14px;">📱</div>
+                                    <div class="label">Device</div>
+                                    <div class="val">Pixel 9 Pro XL</div>
                                 </div>
-                                <input type="range" min="4" max="50" value="28" class="kyant-range-input" id="sliderBlur">
-                            </div>
-
-                            <div class="kyant-slider-row">
-                                <div class="kyant-slider-label">
-                                    <span>Refraction height</span>
-                                    <span id="labelRefraction">20 dp</span>
+                                <div class="about-spec-box">
+                                    <div style="font-size: 14px;">⚡</div>
+                                    <div class="label">Processor</div>
+                                    <div class="val">Tensor G4</div>
                                 </div>
-                                <input type="range" min="4" max="36" value="20" class="kyant-range-input" id="sliderRefraction">
+                                <div class="about-spec-box">
+                                    <div style="font-size: 14px;">🐧</div>
+                                    <div class="label">Kernel</div>
+                                    <div class="val">Linux 6.1 LTS</div>
+                                </div>
+                                <div class="about-spec-box">
+                                    <div style="font-size: 14px;">🛡️</div>
+                                    <div class="label">Security</div>
+                                    <div class="val">2026-09-05</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Kyant0 Surface Liquid Button & Liquid Toggle (from banner.jpg) -->
-                        <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center;">
-                            <button class="liquid-btn" style="flex: 1; padding: 9px 14px; font-size: 12px; border-radius: 999px;">
-                                Surface Liquid
-                            </button>
-                            <div class="kyant-toggle" id="demoToggle">
-                                <div class="kyant-toggle-thumb" id="demoToggleThumb"></div>
+                            <!-- Detailed Specs Card -->
+                            <div class="phone-category-card">
+                                <div class="phone-category-header">Software Specifications</div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">XephiraOS Version</div>
+                                        <div class="phone-category-sub">1.0-STABLE-OFFICIAL</div>
+                                    </div>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Android Version</div>
+                                        <div class="phone-category-sub">16 (API 36 Baklava)</div>
+                                    </div>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">Build Number</div>
+                                        <div class="phone-category-sub">AP2A.260905.004.A1</div>
+                                    </div>
+                                </div>
+                                <div class="phone-divider"></div>
+                                <div class="phone-category-item">
+                                    <div class="phone-category-info">
+                                        <div class="phone-category-title">SELinux Status</div>
+                                        <div class="phone-category-sub">Enforcing</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Kyant0 Liquid Bottom Tabs (from catalog_app.jpg) -->
-                        <div class="liquid-glass-subtle" style="border-radius: 999px; padding: 6px 10px; display: flex; justify-content: space-around; align-items: center;">
-                            <span style="font-size: 11px; font-weight: 700; color: #020617; background: #ffffff; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 8px rgba(255,255,255,0.5);">Tab 1</span>
-                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 2</span>
-                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 3</span>
-                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 4</span>
                         </div>
                     </div>
                 </div>

@@ -3,10 +3,12 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initNavbarScroll();
     initLiquidGlassTilt();
     initMobileMenu();
     initHeroPhoneInteractive();
+    initPhoneViewSwitcher();
     initKyantBackdropControls();
 });
 
@@ -163,5 +165,68 @@ function initKyantBackdropControls() {
                 toggleThumb.style.transform = 'translateX(0px)';
             }
         });
+    }
+}
+
+/* ─── DAY / NIGHT (LIGHT / DARK) THEME SWITCHER ─── */
+function initTheme() {
+    // Default theme is 'light' (white background) as requested
+    const savedTheme = localStorage.getItem('xephira-theme') || 'light';
+    applyTheme(savedTheme);
+
+    const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+            localStorage.setItem('xephira-theme', nextTheme);
+        });
+    });
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+/* ─── PHONE MOCKUP VIEW SWITCHER (SETTINGS HOME & ABOUT PHONE) ─── */
+function initPhoneViewSwitcher() {
+    const tabSettings = document.getElementById('phoneTabSettings');
+    const tabAbout = document.getElementById('phoneTabAbout');
+    const heroPhoneAboutCard = document.getElementById('heroPhoneAboutCard');
+    const aboutBackBtn = document.getElementById('aboutBackBtn');
+
+    if (tabSettings) {
+        tabSettings.addEventListener('click', () => setPhoneView('settings'));
+    }
+    if (tabAbout) {
+        tabAbout.addEventListener('click', () => setPhoneView('about'));
+    }
+    if (heroPhoneAboutCard) {
+        heroPhoneAboutCard.addEventListener('click', () => setPhoneView('about'));
+    }
+    if (aboutBackBtn) {
+        aboutBackBtn.addEventListener('click', () => setPhoneView('settings'));
+    }
+}
+
+function setPhoneView(view) {
+    const settingsView = document.getElementById('phoneViewSettings');
+    const aboutView = document.getElementById('phoneViewAbout');
+    const tabSettings = document.getElementById('phoneTabSettings');
+    const tabAbout = document.getElementById('phoneTabAbout');
+
+    if (!settingsView || !aboutView) return;
+
+    if (view === 'about') {
+        settingsView.classList.remove('active');
+        aboutView.classList.add('active');
+        if (tabSettings) tabSettings.classList.remove('active');
+        if (tabAbout) tabAbout.classList.add('active');
+    } else {
+        aboutView.classList.remove('active');
+        settingsView.classList.add('active');
+        if (tabAbout) tabAbout.classList.remove('active');
+        if (tabSettings) tabSettings.classList.add('active');
     }
 }
