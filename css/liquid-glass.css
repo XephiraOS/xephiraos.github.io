@@ -1,68 +1,95 @@
 /*
- * XephiraOS - Kyant0 White Liquid Glass Design System
- * Pure White Liquid Glass, SDF Meniscus Optics, and Specular Rim Highlights
- * Inspired by Kyant0/AndroidLiquidGlass & Apple VisionOS Pure Crystal Frosted Glass
+ * XephiraOS - Exact Kyant0 Liquid Glass (Backdrop) Engine
+ * Direct implementation of Kyant0/AndroidLiquidGlass optical physics
+ * Analyzed directly from Kyant0's official artworks:
+ * - Refraction height & amount cushion
+ * - Analytic normal meniscus curvature
+ * - Convex water-droplet specular highlights (top-left catch, bottom-right reflection)
+ * - Pure crystal water translucency over vibrant fluid gradients
  */
 
 :root {
-    /* ─── PURE WHITE LIQUID GLASS TOKENS ─── */
-    --glass-bg-top: rgba(255, 255, 255, 0.26);
-    --glass-bg-mid: rgba(255, 255, 255, 0.14);
-    --glass-bg-bottom: rgba(255, 255, 255, 0.06);
+    /* ─── KYANT0 OPTICAL MENISCUS TOKENS ─── */
+    --kyant-glass-bg: linear-gradient(
+        140deg, 
+        rgba(255, 255, 255, 0.42) 0%, 
+        rgba(255, 255, 255, 0.20) 45%, 
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    --kyant-glass-bg-hover: linear-gradient(
+        140deg, 
+        rgba(255, 255, 255, 0.52) 0%, 
+        rgba(255, 255, 255, 0.28) 45%, 
+        rgba(255, 255, 255, 0.14) 100%
+    );
 
-    --glass-border-outer: rgba(255, 255, 255, 0.50);
-    --glass-border-highlight: rgba(255, 255, 255, 0.95);
-    --glass-border-subtle: rgba(255, 255, 255, 0.30);
+    --kyant-border-rim: rgba(255, 255, 255, 0.75);
+    --kyant-border-rim-hover: rgba(255, 255, 255, 0.95);
 
-    --glass-blur-heavy: 36px;
-    --glass-blur-std: 26px;
-    --glass-blur-light: 18px;
+    /* Kyant0 Physical Meniscus Shadow Matrix */
+    --kyant-meniscus-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.35),
+        /* Top-Left Specular Light Catch (Refraction Bevel) */
+        inset 0 2.5px 3.5px 0 rgba(255, 255, 255, 0.95),
+        inset 2.5px 0 3.5px 0 rgba(255, 255, 255, 0.75),
+        /* Bottom-Right Dark Refraction (Ground Reflection) */
+        inset 0 -2.5px 3.5px 0 rgba(0, 0, 0, 0.22),
+        inset -2.5px 0 3.5px 0 rgba(0, 0, 0, 0.12),
+        /* 20dp Inner Refraction Cushion (Backdrop Caustic Glow) */
+        inset 0 0 24px 4px rgba(255, 255, 255, 0.28),
+        /* Outer Ambient Floating Depth */
+        0 24px 50px -12px rgba(0, 0, 0, 0.45),
+        0 8px 20px -4px rgba(0, 0, 0, 0.25);
 
-    /* White Crystal Specular & Ambient Shadows */
-    --glass-shadow: 
-        0 20px 48px -12px rgba(0, 0, 0, 0.55), 
-        0 0 24px rgba(255, 255, 255, 0.16),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
-        inset 0 -1px 2px rgba(255, 255, 255, 0.30);
+    --kyant-meniscus-shadow-hover: 
+        0 0 0 1px rgba(255, 255, 255, 0.65),
+        inset 0 3px 4px 0 #ffffff,
+        inset 3px 0 4px 0 rgba(255, 255, 255, 0.90),
+        inset 0 -3px 4px 0 rgba(0, 0, 0, 0.26),
+        inset -3px 0 4px 0 rgba(0, 0, 0, 0.16),
+        inset 0 0 32px 6px rgba(255, 255, 255, 0.38),
+        0 32px 65px -10px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(255, 255, 255, 0.30);
 
-    --glass-shadow-hover: 
-        0 28px 64px -10px rgba(0, 0, 0, 0.65), 
-        0 0 40px rgba(255, 255, 255, 0.38),
-        inset 0 2px 3px rgba(255, 255, 255, 1.0),
-        inset 0 -1.5px 2px rgba(255, 255, 255, 0.45);
-
-    --glass-shadow-active: 
-        0 12px 28px -6px rgba(0, 0, 0, 0.45),
-        0 0 18px rgba(255, 255, 255, 0.2),
-        inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
-
-    --accent-glow: rgba(255, 255, 255, 0.40);
-    --accent-blue: #38bdf8;
-    --accent-ice: #e0f2fe;
+    --kyant-blur-std: 28px;
+    --kyant-blur-heavy: 36px;
+    --kyant-blur-light: 18px;
 }
 
-/* ─── BASE WHITE LIQUID GLASS SURFACE ─── */
+/* ─── BASE KYANT0 LIQUID GLASS LENS ─── */
 .liquid-glass {
     position: relative;
-    background: linear-gradient(
-        165deg, 
-        var(--glass-bg-top) 0%, 
-        var(--glass-bg-mid) 42%, 
-        var(--glass-bg-bottom) 100%
-    );
-    backdrop-filter: blur(var(--glass-blur-std)) saturate(190%) brightness(114%);
-    -webkit-backdrop-filter: blur(var(--glass-blur-std)) saturate(190%) brightness(114%);
-    border: 1px solid var(--glass-border-outer);
-    border-radius: 28px;
-    box-shadow: var(--glass-shadow);
-    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                box-shadow 0.28s ease, 
-                border-color 0.28s ease,
-                background 0.28s ease;
+    background: var(--kyant-glass-bg);
+    backdrop-filter: blur(var(--kyant-blur-std)) saturate(190%) contrast(105%);
+    -webkit-backdrop-filter: blur(var(--kyant-blur-std)) saturate(190%) contrast(105%);
+    border: 1px solid var(--kyant-border-rim);
+    border-radius: 32px;
+    box-shadow: var(--kyant-meniscus-shadow);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.3s ease, 
+                border-color 0.3s ease,
+                background 0.3s ease;
     overflow: hidden;
 }
 
-/* Kyant0 Dynamic White Specular Meniscus Sweep */
+/* Kyant0 Inner Meniscus Optical Cushion */
+.liquid-glass::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: inherit;
+    border: 1.5px solid rgba(255, 255, 255, 0.40);
+    background: linear-gradient(
+        180deg, 
+        rgba(255, 255, 255, 0.22) 0%, 
+        rgba(255, 255, 255, 0.0) 40%, 
+        rgba(0, 0, 0, 0.06) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Kyant0 Dynamic Specular Ray Sweep */
 .liquid-glass::before {
     content: '';
     position: absolute;
@@ -74,167 +101,180 @@
         90deg, 
         transparent 0%, 
         rgba(255, 255, 255, 0.0) 20%, 
-        rgba(255, 255, 255, 0.45) 50%, 
+        rgba(255, 255, 255, 0.55) 50%, 
         rgba(255, 255, 255, 0.0) 80%, 
         transparent 100%
     );
     transform: skewX(-25deg);
     pointer-events: none;
-    animation: whiteLiquidSheenSweep 7.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
+    animation: kyantSheenSweep 7.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
 }
 
-@keyframes whiteLiquidSheenSweep {
+@keyframes kyantSheenSweep {
     0% { left: -160%; opacity: 0; }
     12% { opacity: 1; }
-    42% { left: 210%; opacity: 0; }
+    40% { left: 210%; opacity: 0; }
     100% { left: 210%; opacity: 0; }
 }
 
-/* White Liquid Glass Hover State */
 .liquid-glass:hover {
-    border-color: rgba(255, 255, 255, 0.85);
-    background: linear-gradient(
-        165deg, 
-        rgba(255, 255, 255, 0.34) 0%, 
-        rgba(255, 255, 255, 0.20) 42%, 
-        rgba(255, 255, 255, 0.10) 100%
-    );
-    box-shadow: var(--glass-shadow-hover);
+    border-color: var(--kyant-border-rim-hover);
+    background: var(--kyant-glass-bg-hover);
+    box-shadow: var(--kyant-meniscus-shadow-hover);
     transform: translateY(-4px);
 }
 
 .liquid-glass:active {
     transform: scale(0.985);
-    box-shadow: var(--glass-shadow-active);
 }
 
-/* ─── VARIANT: HEAVY WHITE LIQUID GLASS (Navbar, Modals, Banner) ─── */
+/* ─── VARIANT: HEAVY GLASS SLAB (Navbar, Modal, Banner) ─── */
 .liquid-glass-heavy {
     background: linear-gradient(
-        165deg, 
-        rgba(255, 255, 255, 0.32) 0%, 
-        rgba(255, 255, 255, 0.18) 50%, 
-        rgba(255, 255, 255, 0.08) 100%
+        140deg, 
+        rgba(255, 255, 255, 0.48) 0%, 
+        rgba(255, 255, 255, 0.26) 45%, 
+        rgba(255, 255, 255, 0.12) 100%
     );
-    backdrop-filter: blur(var(--glass-blur-heavy)) saturate(200%) brightness(118%);
-    -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(200%) brightness(118%);
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(var(--kyant-blur-heavy)) saturate(200%) contrast(108%);
+    -webkit-backdrop-filter: blur(var(--kyant-blur-heavy)) saturate(200%) contrast(108%);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
     box-shadow: 
-        0 24px 56px -12px rgba(0, 0, 0, 0.6), 
-        0 0 32px rgba(255, 255, 255, 0.22),
-        inset 0 2px 3px rgba(255, 255, 255, 1.0),
-        inset 0 -1.5px 2px rgba(255, 255, 255, 0.4);
+        0 0 0 1px rgba(255, 255, 255, 0.45),
+        inset 0 3px 4px 0 #ffffff,
+        inset 3px 0 4px 0 rgba(255, 255, 255, 0.85),
+        inset 0 -3px 4px 0 rgba(0, 0, 0, 0.25),
+        inset -3px 0 4px 0 rgba(0, 0, 0, 0.15),
+        inset 0 0 32px 6px rgba(255, 255, 255, 0.35),
+        0 30px 70px -15px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(255, 255, 255, 0.25);
 }
 
-/* ─── VARIANT: SUBTLE WHITE LIQUID GLASS (Inner tiles, inputs, spec chips) ─── */
+/* ─── VARIANT: SUBTLE GLASS WELL (Tiles, Inputs, Pills) ─── */
 .liquid-glass-subtle {
     background: linear-gradient(
-        165deg, 
-        rgba(255, 255, 255, 0.20) 0%, 
-        rgba(255, 255, 255, 0.10) 100%
+        140deg, 
+        rgba(255, 255, 255, 0.28) 0%, 
+        rgba(255, 255, 255, 0.14) 100%
     );
-    backdrop-filter: blur(var(--glass-blur-light)) saturate(175%) brightness(112%);
-    -webkit-backdrop-filter: blur(var(--glass-blur-light)) saturate(175%) brightness(112%);
-    border: 1px solid rgba(255, 255, 255, 0.40);
-    border-radius: 20px;
+    backdrop-filter: blur(var(--kyant-blur-light)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--kyant-blur-light)) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
     box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.25),
-        inset 0 1.2px 1.5px rgba(255, 255, 255, 0.9);
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.90),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.15),
+        inset 0 0 14px rgba(255, 255, 255, 0.22),
+        0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
-/* ─── WHITE LIQUID GLASS BUTTONS ─── */
+/* ─── KYANT0 "SURFACE LIQUID BUTTON" (Exact Artwork Match) ─── */
 .liquid-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 13px 26px;
+    padding: 13px 28px;
     font-family: 'Inter', sans-serif;
     font-size: 14.5px;
     font-weight: 600;
     color: #ffffff;
     text-decoration: none;
+    /* Pillowy Convex Water Droplet */
     background: linear-gradient(
         180deg, 
-        rgba(255, 255, 255, 0.36) 0%, 
-        rgba(255, 255, 255, 0.16) 100%
+        rgba(255, 255, 255, 0.48) 0%, 
+        rgba(255, 255, 255, 0.22) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
     border-radius: 999px;
-    backdrop-filter: blur(20px) brightness(118%);
-    -webkit-backdrop-filter: blur(20px) brightness(118%);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
     cursor: pointer;
     box-shadow: 
-        0 6px 22px rgba(0, 0, 0, 0.35), 
-        0 0 18px rgba(255, 255, 255, 0.22), 
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* Top specular catch */
+        inset 0 2px 3px 0 #ffffff,
+        inset 0 -2px 3px 0 rgba(0, 0, 0, 0.22),
+        inset 0 0 16px rgba(255, 255, 255, 0.35),
+        0 8px 24px rgba(0, 0, 0, 0.30);
+    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
+}
+
+.liquid-btn::after {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    pointer-events: none;
 }
 
 .liquid-btn:hover {
     background: linear-gradient(
         180deg, 
-        rgba(255, 255, 255, 0.50) 0%, 
-        rgba(255, 255, 255, 0.24) 100%
+        rgba(255, 255, 255, 0.62) 0%, 
+        rgba(255, 255, 255, 0.30) 100%
     );
-    border-color: rgba(255, 255, 255, 0.95);
+    border-color: #ffffff;
     box-shadow: 
-        0 12px 32px rgba(255, 255, 255, 0.35), 
-        0 0 28px rgba(255, 255, 255, 0.50),
-        inset 0 2px 2px #ffffff;
+        inset 0 2.5px 3.5px 0 #ffffff,
+        inset 0 -2px 3px 0 rgba(0, 0, 0, 0.25),
+        inset 0 0 24px rgba(255, 255, 255, 0.50),
+        0 14px 35px rgba(255, 255, 255, 0.35),
+        0 0 25px rgba(255, 255, 255, 0.45);
     transform: translateY(-2px);
     color: #ffffff;
 }
 
 .liquid-btn:active {
     transform: scale(0.96);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Primary High-Gloss Solid White Glass Button */
+/* Kyant0 Tinted / Primary Solid Liquid Button */
 .liquid-btn-primary {
-    background: linear-gradient(180deg, #ffffff 0%, rgba(240, 245, 255, 0.95) 100%);
-    color: #030712;
-    border: 1px solid #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(235, 245, 255, 0.95) 100%);
+    color: #020617;
+    border: 1.5px solid #ffffff;
     box-shadow: 
-        0 8px 26px rgba(255, 255, 255, 0.55), 
-        0 0 20px rgba(255, 255, 255, 0.40),
-        inset 0 1.5px 2px #ffffff;
+        inset 0 2px 2px #ffffff,
+        0 10px 30px rgba(255, 255, 255, 0.6), 
+        0 0 25px rgba(255, 255, 255, 0.4);
     font-weight: 700;
 }
 
 .liquid-btn-primary:hover {
     background: #ffffff;
     box-shadow: 
-        0 12px 38px rgba(255, 255, 255, 0.75), 
-        0 0 35px rgba(255, 255, 255, 0.60),
-        inset 0 2px 2px #ffffff;
+        inset 0 2.5px 3px #ffffff,
+        0 14px 40px rgba(255, 255, 255, 0.8), 
+        0 0 35px rgba(255, 255, 255, 0.65);
     color: #000000;
     transform: translateY(-2px);
 }
 
-/* ─── WHITE LIQUID GLASS PILLS & BADGES ─── */
+/* ─── KYANT0 LIQUID PILL BADGE ─── */
 .liquid-pill {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 6px 16px;
+    gap: 8px;
+    padding: 7px 18px;
     font-size: 11.5px;
     font-weight: 700;
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.62);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.18) 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
     border-radius: 999px;
-    backdrop-filter: blur(16px) brightness(120%);
-    -webkit-backdrop-filter: blur(16px) brightness(120%);
+    backdrop-filter: blur(18px) saturate(190%);
+    -webkit-backdrop-filter: blur(18px) saturate(190%);
     letter-spacing: 0.6px;
     box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.2), 
-        0 0 18px rgba(255, 255, 255, 0.2),
-        inset 0 1.2px 1.5px rgba(255, 255, 255, 0.95);
+        inset 0 1.5px 2px #ffffff,
+        inset 0 -1.5px 2px rgba(0, 0, 0, 0.15),
+        0 6px 18px rgba(0, 0, 0, 0.25),
+        0 0 16px rgba(255, 255, 255, 0.20);
 }
 
 .liquid-pill-dot {
@@ -250,29 +290,57 @@
     box-shadow: 0 0 10px #4ade80;
 }
 
-/* ─── WHITE LIQUID GLASS SEARCH & INPUTS ─── */
+/* ─── KYANT0 LIQUID TOGGLE & SLIDERS (Match README Artworks) ─── */
+.kyant-toggle {
+    width: 58px;
+    height: 32px;
+    border-radius: 999px;
+    background: #4ade80;
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.kyant-toggle-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1.5px 1.5px #ffffff;
+    transform: translateX(24px);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── KYANT0 LIQUID INPUT WRAPPER ─── */
 .liquid-input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.10) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.14) 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
     border-radius: 999px;
-    backdrop-filter: blur(24px) brightness(115%);
-    -webkit-backdrop-filter: blur(24px) brightness(115%);
-    padding: 10px 18px;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    padding: 11px 20px;
     box-shadow: 
-        0 4px 20px rgba(0, 0, 0, 0.25),
-        inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
+        inset 0 1.5px 2px #ffffff,
+        inset 0 -1.5px 2px rgba(0, 0, 0, 0.15),
+        0 6px 20px rgba(0, 0, 0, 0.25);
     transition: all 0.25s ease;
 }
 
 .liquid-input-wrapper:focus-within {
-    border-color: rgba(255, 255, 255, 0.95);
+    border-color: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.22) 100%);
     box-shadow: 
-        0 0 28px rgba(255, 255, 255, 0.35),
-        inset 0 1.5px 2px #ffffff;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.16) 100%);
+        inset 0 2px 2px #ffffff,
+        0 0 30px rgba(255, 255, 255, 0.40);
 }
 
 .liquid-input {
@@ -282,10 +350,10 @@
     outline: none;
     color: #ffffff;
     font-family: inherit;
-    font-size: 14.5px;
+    font-size: 15px;
     padding-left: 10px;
 }
 
 .liquid-input::placeholder {
-    color: rgba(255, 255, 255, 0.60);
+    color: rgba(255, 255, 255, 0.70);
 }

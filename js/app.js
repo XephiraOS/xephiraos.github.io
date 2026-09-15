@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiquidGlassTilt();
     initMobileMenu();
     initHeroPhoneInteractive();
+    initKyantBackdropControls();
 });
 
 /* ─── STICKY NAVBAR BLUR ENHANCEMENT ─── */
@@ -106,4 +107,61 @@ function initMobileMenu() {
             navLinks.style.boxShadow = '0 20px 40px rgba(0,0,0,0.8)';
         }
     });
+}
+
+/* ─── KYANT0 BACKDROP LIVE INTERACTION CONTROLLER ─── */
+function initKyantBackdropControls() {
+    const lens = document.getElementById('kyantFloatingLens');
+    const radiusSlider = document.getElementById('sliderRadius');
+    const blurSlider = document.getElementById('sliderBlur');
+    const refractionSlider = document.getElementById('sliderRefraction');
+    const toggle = document.getElementById('demoToggle');
+    const toggleThumb = document.getElementById('demoToggleThumb');
+
+    if (radiusSlider && lens) {
+        radiusSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const label = document.getElementById('labelRadius');
+            if (label) label.textContent = `${val} dp`;
+            lens.style.borderRadius = `${val}px`;
+        });
+    }
+
+    if (blurSlider && lens) {
+        blurSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const label = document.getElementById('labelBlur');
+            if (label) label.textContent = `${val} dp`;
+            lens.style.backdropFilter = `blur(${val}px) saturate(220%)`;
+            lens.style.webkitBackdropFilter = `blur(${val}px) saturate(220%)`;
+        });
+    }
+
+    if (refractionSlider && lens) {
+        refractionSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const label = document.getElementById('labelRefraction');
+            if (label) label.textContent = `${val} dp`;
+            lens.style.boxShadow = `
+                inset 0 ${val * 0.15}px ${val * 0.2}px #ffffff,
+                inset 0 -${val * 0.1}px ${val * 0.15}px rgba(0, 0, 0, 0.2),
+                inset 0 0 ${val * 1.2}px rgba(255, 255, 255, 0.45),
+                0 16px 36px rgba(0, 0, 0, 0.35)
+            `;
+        });
+    }
+
+    if (toggle && toggleThumb) {
+        let active = true;
+        toggle.addEventListener('click', () => {
+            active = !active;
+            if (active) {
+                toggle.style.background = '#4ade80';
+                toggleThumb.style.transform = 'translateX(24px)';
+            } else {
+                toggle.style.background = 'rgba(255, 255, 255, 0.35)';
+                toggleThumb.style.transform = 'translateX(0px)';
+            }
+        });
+    }
 }

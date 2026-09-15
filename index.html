@@ -109,82 +109,74 @@
                     </div>
 
                     <div class="mockup-screen-container">
-                        <!-- Floating White Liquid Glass Search Bar -->
-                        <div class="liquid-glass-subtle" style="border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 14px;">🔍</span>
-                            <span style="font-size: 12.5px; color: #ffffff; font-weight: 500;">Search settings, apps...</span>
+                        <!-- Kyant0 Parameter Indicator Badges -->
+                        <div style="display: flex; justify-content: space-between; gap: 4px;">
+                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Refraction: 20dp</span>
+                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Amount: -60dp</span>
+                            <span class="liquid-pill" style="font-size: 9.5px; padding: 4px 8px;">Bleed: 0.00</span>
                         </div>
 
-                        <!-- Hero About Card -->
-                        <div class="liquid-glass" style="padding: 16px; display: flex; align-items: center; gap: 14px; border-radius: 22px;">
-                            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: inset 0 1px 1px #ffffff;">
-                                <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira" style="width: 100%; height: 100%; object-fit: contain;">
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <strong style="font-size: 15px; color: #ffffff;">XephiraOS 1.0</strong>
-                                    <span style="font-size: 8.5px; font-weight: 700; background: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.7); padding: 1px 7px; border-radius: 99px; color: #ffffff;">OFFICIAL</span>
+                        <!-- Kyant0 Floating Optical Convex Lens (Live Refractor) -->
+                        <div class="kyant-floating-lens" id="kyantFloatingLens">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira" style="width: 24px; height: 24px; filter: drop-shadow(0 2px 6px rgba(255,255,255,0.6));">
+                                    <strong style="font-size: 13.5px; color: #ffffff;">XephiraOS 1.0</strong>
                                 </div>
-                                <div style="font-size: 11px; color: #e2e8f0; margin-top: 2px;">Android 16 • White Liquid Glass</div>
+                                <span class="liquid-pill liquid-pill-green" style="font-size: 9px; padding: 2px 8px;">KYANT0 LENS</span>
                             </div>
-                            <span style="color: rgba(255,255,255,0.8); font-size: 14px;">›</span>
+                            <p style="font-size: 11px; color: rgba(255,255,255,0.95); line-height: 1.45;">
+                                SDF Meniscus convex curvature bending fluid background waves in real time.
+                            </p>
                         </div>
 
-                        <!-- Status Pills Row -->
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-                            <div class="liquid-glass-subtle" style="padding: 8px 4px; text-align: center; border-radius: 14px;">
-                                <div style="font-size: 11px; font-weight: 700; color: #ffffff;">Wi-Fi 6E</div>
-                                <div style="font-size: 9px; color: #cbd5e1;">Active</div>
+                        <!-- Kyant0 Sliders Controls Panel (from catalog_app.jpg) -->
+                        <div class="liquid-glass-subtle" style="padding: 14px 16px; border-radius: 24px;">
+                            <div style="font-size: 11px; font-weight: 800; color: #ffffff; margin-bottom: 10px; letter-spacing: 0.8px; text-transform: uppercase;">
+                                Kyant0 Backdrop Controls
                             </div>
-                            <div class="liquid-glass-subtle" style="padding: 8px 4px; text-align: center; border-radius: 14px;">
-                                <div style="font-size: 11px; font-weight: 700; color: #4ade80;">92%</div>
-                                <div style="font-size: 9px; color: #cbd5e1;">Charging</div>
+                            
+                            <div class="kyant-slider-row">
+                                <div class="kyant-slider-label">
+                                    <span>Corner radius</span>
+                                    <span id="labelRadius">28 dp</span>
+                                </div>
+                                <input type="range" min="8" max="44" value="28" class="kyant-range-input" id="sliderRadius">
                             </div>
-                            <div class="liquid-glass-subtle" style="padding: 8px 4px; text-align: center; border-radius: 14px;">
-                                <div style="font-size: 11px; font-weight: 700; color: #38bdf8;">184 GB</div>
-                                <div style="font-size: 9px; color: #cbd5e1;">Free</div>
-                            </div>
-                        </div>
 
-                        <!-- Grouped Category Cards -->
-                        <div class="liquid-glass" style="border-radius: 20px; padding: 4px 0;">
-                            <div style="padding: 11px 14px; display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 15px;">📶</span>
-                                <div style="flex: 1;">
-                                    <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">Network & internet</div>
-                                    <div style="font-size: 10.5px; color: #cbd5e1;">Mobile, Wi-Fi, hotspot, SIMs</div>
+                            <div class="kyant-slider-row">
+                                <div class="kyant-slider-label">
+                                    <span>Blur radius</span>
+                                    <span id="labelBlur">28 dp</span>
                                 </div>
-                                <span style="color: rgba(255,255,255,0.7); font-size: 14px;">›</span>
+                                <input type="range" min="4" max="50" value="28" class="kyant-range-input" id="sliderBlur">
                             </div>
-                            <div style="height: 1px; background: rgba(255,255,255,0.18); margin: 0 14px;"></div>
-                            <div style="padding: 11px 14px; display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 15px;">🎧</span>
-                                <div style="flex: 1;">
-                                    <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">Connected devices</div>
-                                    <div style="font-size: 10.5px; color: #cbd5e1;">Bluetooth, Quick Share</div>
+
+                            <div class="kyant-slider-row">
+                                <div class="kyant-slider-label">
+                                    <span>Refraction height</span>
+                                    <span id="labelRefraction">20 dp</span>
                                 </div>
-                                <span style="color: rgba(255,255,255,0.7); font-size: 14px;">›</span>
+                                <input type="range" min="4" max="36" value="20" class="kyant-range-input" id="sliderRefraction">
                             </div>
                         </div>
 
-                        <div class="liquid-glass" style="border-radius: 20px; padding: 4px 0;">
-                            <div style="padding: 11px 14px; display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 15px;">⚡</span>
-                                <div style="flex: 1;">
-                                    <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">Battery & power</div>
-                                    <div style="font-size: 10.5px; color: #cbd5e1;">Adaptive charging enabled</div>
-                                </div>
-                                <span style="color: rgba(255,255,255,0.7); font-size: 14px;">›</span>
+                        <!-- Kyant0 Surface Liquid Button & Liquid Toggle (from banner.jpg) -->
+                        <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center;">
+                            <button class="liquid-btn" style="flex: 1; padding: 9px 14px; font-size: 12px; border-radius: 999px;">
+                                Surface Liquid
+                            </button>
+                            <div class="kyant-toggle" id="demoToggle">
+                                <div class="kyant-toggle-thumb" id="demoToggleThumb"></div>
                             </div>
-                            <div style="height: 1px; background: rgba(255,255,255,0.18); margin: 0 14px;"></div>
-                            <div style="padding: 11px 14px; display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 15px;">🛡️</span>
-                                <div style="flex: 1;">
-                                    <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">Security & biometrics</div>
-                                    <div style="font-size: 10.5px; color: #cbd5e1;">Screen lock, fingerprint, face</div>
-                                </div>
-                                <span style="color: rgba(255,255,255,0.7); font-size: 14px;">›</span>
-                            </div>
+                        </div>
+
+                        <!-- Kyant0 Liquid Bottom Tabs (from catalog_app.jpg) -->
+                        <div class="liquid-glass-subtle" style="border-radius: 999px; padding: 6px 10px; display: flex; justify-content: space-around; align-items: center;">
+                            <span style="font-size: 11px; font-weight: 700; color: #020617; background: #ffffff; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 8px rgba(255,255,255,0.5);">Tab 1</span>
+                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 2</span>
+                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 3</span>
+                            <span style="font-size: 11px; font-weight: 600; color: #ffffff;">Tab 4</span>
                         </div>
                     </div>
                 </div>
