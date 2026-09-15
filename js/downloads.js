@@ -24,7 +24,7 @@ const DEVICES_DB = [
         vanillaSha: "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
         changelog: [
             "Initial official XephiraOS 1.0 release based on Android 16",
-            "Full Kyant0 Pure Liquid Glass Settings UI and About Phone matrix",
+            "Full Pure Water Liquid Glass Settings UI and About Phone experience",
             "Upgraded Linux 5.4.284 kernel with Zen scheduler optimizations",
             "Enabled VoLTE, VoWiFi, and 5G Carrier Aggregation out of the box",
             "Integrated official Xephira cyber boot animation"
@@ -49,7 +49,7 @@ const DEVICES_DB = [
         gappsSha: "a6b98741369cf87da564b19289547d69281e496739b61184ca778391b4902cd5",
         vanillaSha: "c18f596328bc1d198adbf4c8996fb92427ae41e4649b934ca495991b7852b822",
         changelog: [
-            "Full hardware-accelerated AGSL Kyant0 Liquid Glass RuntimeShaders",
+            "Full hardware-accelerated AGSL Hydro-Glass RuntimeShaders",
             "Pixel 9 Pro XL Tensor G4 security enclave fully initialized",
             "Ultra-wideband (UWB) and satellite connectivity support",
             "CameraX with Pixel 9 computational photography pipeline"
