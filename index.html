@@ -101,10 +101,11 @@
                 </div>
             </div>
 
-            <!-- Interactive 3D Phone Mockup Showcase with Settings Home & About Phone -->
+            <!-- Interactive 3D Phone Mockup Showcase with Kyant0 Catalog, Settings Home & About Phone -->
             <div class="hero-phone-wrap">
                 <div class="phone-mode-switcher">
-                    <button class="phone-mode-btn active" id="phoneTabSettings">⚙️ Settings Home</button>
+                    <button class="phone-mode-btn active" id="phoneTabKyant0">🌊 Kyant0 Catalog</button>
+                    <button class="phone-mode-btn" id="phoneTabSettings">⚙️ Settings Home</button>
                     <button class="phone-mode-btn" id="phoneTabAbout">✨ About Phone</button>
                 </div>
 
@@ -115,8 +116,102 @@
                     </div>
 
                     <div class="mockup-screen-container">
-                        <!-- VIEW 1: SETTINGS HOME -->
-                        <div class="phone-view active" id="phoneViewSettings">
+                        <!-- VIEW 1: KYANT0 CATALOG (EXACT README ARTWORKS EXPERIENCE) -->
+                        <div class="phone-view active" id="phoneViewKyant0">
+                            <!-- Kyant0 Parameter Indicator Badges -->
+                            <div style="display: flex; justify-content: space-between; gap: 4px; margin-bottom: 8px;">
+                                <span class="liquid-pill" style="font-size: 9px; padding: 3px 7px;">Refraction: 20dp</span>
+                                <span class="liquid-pill" style="font-size: 9px; padding: 3px 7px;">Amount: -60dp</span>
+                                <span class="liquid-pill" style="font-size: 9px; padding: 3px 7px;">Bleed: 0.00</span>
+                            </div>
+
+                            <!-- Kyant0 Floating Optical Convex Lens (Live Refractor) hovering over homescreen apps -->
+                            <div class="kyant-floating-convex-lens" id="kyantFloatingLens">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira" style="width: 20px; height: 20px; filter: drop-shadow(0 2px 6px rgba(255,255,255,0.7));">
+                                        <strong style="font-size: 13px; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">Kyant0 Liquid Lens</strong>
+                                    </div>
+                                    <span class="liquid-pill liquid-pill-green" style="font-size: 8px; padding: 2px 6px;">MENISCUS SDF</span>
+                                </div>
+                                <p style="font-size: 11px; color: rgba(255,255,255,0.95); line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">
+                                    Bending background app icons with -60dp optical displacement and 20dp meniscus depth.
+                                </p>
+                            </div>
+
+                            <!-- Kyant0 Backdrop Controls Panel (from catalog_app.jpg) -->
+                            <div class="kyant-controls-panel">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-size: 10.5px; font-weight: 800; color: #ffffff; letter-spacing: 0.8px; text-transform: uppercase;">Backdrop Controls</span>
+                                    <span style="font-size: 9.5px; color: #38bdf8; font-weight: 700;">AGSL RUNTIME</span>
+                                </div>
+                                
+                                <div class="kyant-slider-item">
+                                    <div class="kyant-slider-header-row">
+                                        <span>Corner radius</span>
+                                        <span class="val" id="labelRadius">28 dp</span>
+                                    </div>
+                                    <input type="range" min="8" max="44" value="28" class="kyant-slider-track-input" id="sliderRadius">
+                                </div>
+
+                                <div class="kyant-slider-item">
+                                    <div class="kyant-slider-header-row">
+                                        <span>Blur radius</span>
+                                        <span class="val" id="labelBlur">4 dp</span>
+                                    </div>
+                                    <input type="range" min="0" max="30" value="4" class="kyant-slider-track-input" id="sliderBlur">
+                                </div>
+
+                                <div class="kyant-slider-item">
+                                    <div class="kyant-slider-header-row">
+                                        <span>Refraction height</span>
+                                        <span class="val" id="labelRefraction">20 dp</span>
+                                    </div>
+                                    <input type="range" min="4" max="36" value="20" class="kyant-slider-track-input" id="sliderRefraction">
+                                </div>
+
+                                <div class="kyant-slider-item">
+                                    <div class="kyant-slider-header-row">
+                                        <span>Refraction amount</span>
+                                        <span class="val" id="labelAmount">-60 dp</span>
+                                    </div>
+                                    <input type="range" min="-100" max="0" value="-60" class="kyant-slider-track-input" id="sliderAmount">
+                                </div>
+                            </div>
+
+                            <!-- Kyant0 Surface Liquid Button & Liquid Toggle (from banner.jpg) -->
+                            <div style="display: flex; gap: 8px; justify-content: space-between; align-items: center;">
+                                <button class="kyant-surface-button" style="flex: 1; padding: 8px 12px; font-size: 12px;">
+                                    Surface Liquid
+                                </button>
+                                <div class="kyant-liquid-switch" id="demoToggle">
+                                    <div class="kyant-liquid-switch-thumb" id="demoToggleThumb"></div>
+                                </div>
+                            </div>
+
+                            <!-- Kyant0 Liquid Bottom Tabs with Airplanes (from banner.jpg) -->
+                            <div class="kyant-bottom-tabs-bar">
+                                <div class="kyant-bottom-tab-item active" id="demoTab1">
+                                    <span style="font-size: 12px;">✈️</span>
+                                    <span>Tab 1</span>
+                                </div>
+                                <div class="kyant-bottom-tab-item" id="demoTab2">
+                                    <span style="font-size: 12px;">✈️</span>
+                                    <span>Tab 2</span>
+                                </div>
+                                <div class="kyant-bottom-tab-item" id="demoTab3">
+                                    <span style="font-size: 12px;">✈️</span>
+                                    <span>Tab 3</span>
+                                </div>
+                                <div class="kyant-bottom-tab-item" id="demoTab4">
+                                    <span style="font-size: 12px;">✈️</span>
+                                    <span>Tab 4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VIEW 2: SETTINGS HOME -->
+                        <div class="phone-view" id="phoneViewSettings">
                             <!-- Search Bar -->
                             <div class="phone-search-bar">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -340,7 +435,7 @@
             <span class="section-tag">Rendering Innovation</span>
             <h2 class="section-title">The Kyant0 Liquid Glass Architecture</h2>
             <p class="section-description">
-                Unlike ordinary blur overlays, XephiraOS implements hardware-accelerated AGSL RuntimeShaders calculating analytical distance fields and surface normal refraction in real time.
+                Directly ported from the official <a href="https://github.com/Kyant0/AndroidLiquidGlass" target="_blank" style="color: var(--accent-blue); text-decoration: underline; font-weight: 600;">Kyant0/AndroidLiquidGlass</a> engine. Real-time physical Signed Distance Field (SDF) meniscus curvature, -60dp coordinate displacement, and pure crystal water optics.
             </p>
         </div>
 
@@ -349,7 +444,7 @@
                 <div class="optics-icon-box">📐</div>
                 <h3 class="optics-title">SDF Meniscus Geometry</h3>
                 <p class="optics-desc">
-                    Signed Distance Field (SDF) rounded rectangle algorithms determine the exact sub-pixel boundary curvature, creating physical liquid meniscus edges that bend light naturally.
+                    Analytical <code>sdRoundedRect</code> and <code>gradSdRoundedRect</code> algorithms calculate exact sub-pixel normals along the 20dp border, creating genuine liquid meniscus surface tension.
                 </p>
             </div>
 
@@ -357,7 +452,7 @@
                 <div class="optics-icon-box">✨</div>
                 <h3 class="optics-title">Specular Rim Lighting</h3>
                 <p class="optics-desc">
-                    Continuous dual-layer specular reflections react to angle of incidence, producing an ultra-clean, glistening glass edge without distracting rainbow chromatic fringing.
+                    Continuous physical specular reflections react dynamically to the angle of incidence, producing razor-sharp <code>#ffffff</code> highlight bevels and subtle refractive caustic shadows.
                 </p>
             </div>
 
@@ -365,8 +460,87 @@
                 <div class="optics-icon-box">💧</div>
                 <h3 class="optics-title">Crystal Transparency</h3>
                 <p class="optics-desc">
-                    Pure monochrome optical dispersion keeps underlying content completely legible while preserving depth, tactile hierarchy, and 120 FPS render throughput.
+                    Unlike flat opaque milky blurs, Kyant0 keeps the central lens body clear (0–4dp blur), focusing optical refraction along the perimeter where light naturally bends.
                 </p>
+            </div>
+        </div>
+
+        <!-- ─── KYANT0 OFFICIAL README ARTWORKS & LIVE COMPONENTS SHOWCASE ─── -->
+        <div style="margin-top: 54px;">
+            <div style="text-align: center; margin-bottom: 28px;">
+                <div class="liquid-pill" style="margin-bottom: 10px;">
+                    <span class="liquid-pill-dot"></span>
+                    <span>OFFICIAL KYANT0 ARTIFACT REPLICAS</span>
+                </div>
+                <h3 style="font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: var(--theme-text-pure);">
+                    Interactive Components From README.md
+                </h3>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+                <!-- Card 1: Banner Buttons over Nature/Floral Backdrop -->
+                <div class="liquid-glass" style="padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 16px; color: var(--theme-text-pure);">1. Surface & Tinted Buttons</strong>
+                        <span class="liquid-pill" style="font-size: 10px;">from banner.jpg</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--theme-text-secondary);">
+                        Pure liquid glass button capsules over nature photography, demonstrating how crystal refraction preserves underlying petal sharpness:
+                    </p>
+                    <div style="background: url('assets/kyant0/banner.jpg') left top / cover no-repeat; border-radius: 20px; padding: 24px 16px; display: flex; flex-direction: column; gap: 12px; align-items: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.4);">
+                        <button class="kyant-surface-button" style="width: 85%;">Surface Liquid Button</button>
+                        <button class="kyant-surface-button kyant-tinted-blue" style="width: 85%;">Tinted Liquid Button</button>
+                        <button class="kyant-surface-button kyant-tinted-amber" style="width: 85%;">Tinted Liquid Button</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: LiquidToggle Switch -->
+                <div class="liquid-glass" style="padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 16px; color: var(--theme-text-pure);">2. LiquidToggle Switch</strong>
+                        <span class="liquid-pill" style="font-size: 10px;">LiquidToggle.kt</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--theme-text-secondary);">
+                        Vivid green capsule track with a crystal clear liquid glass thumb that bends and magnifies the track underneath:
+                    </p>
+                    <div style="background: var(--card-inner-tile); border: 1px solid var(--card-inner-border); border-radius: 20px; padding: 32px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center;">
+                        <div class="kyant-liquid-switch" id="showcaseToggle" style="width: 84px; height: 42px; padding: 3px;" onclick="this.classList.toggle('off')">
+                            <div class="kyant-liquid-switch-thumb" style="width: 48px; height: 36px;"></div>
+                        </div>
+                        <span style="font-size: 12px; color: var(--theme-text-muted);">Tap switch to toggle liquid lens thumb</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: LiquidBottomTabs -->
+                <div class="liquid-glass" style="padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 16px; color: var(--theme-text-pure);">3. LiquidBottomTabs</strong>
+                        <span class="liquid-pill" style="font-size: 10px;">from catalog_app.jpg</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--theme-text-secondary);">
+                        Floating glass capsule navigation bar with airplane icon indicators and smooth spring capsule selection:
+                    </p>
+                    <div style="background: url('assets/kyant0/homescreen.png') center / cover no-repeat; border-radius: 20px; padding: 36px 12px; box-shadow: inset 0 0 20px rgba(0,0,0,0.4);">
+                        <div class="kyant-bottom-tabs-bar">
+                            <div class="kyant-bottom-tab-item active-green">
+                                <span style="font-size: 13px;">✈️</span>
+                                <span>Tab 1</span>
+                            </div>
+                            <div class="kyant-bottom-tab-item">
+                                <span style="font-size: 13px;">✈️</span>
+                                <span>Tab 2</span>
+                            </div>
+                            <div class="kyant-bottom-tab-item">
+                                <span style="font-size: 13px;">✈️</span>
+                                <span>Tab 3</span>
+                            </div>
+                            <div class="kyant-bottom-tab-item">
+                                <span style="font-size: 13px;">✈️</span>
+                                <span>Tab 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -21,7 +21,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* ─── PURE CLEAN BACKGROUND (NO GLOW) ─── */
+/* ─── PURE CLEAN BACKGROUND (NO GLOW) WITH FLUID OPTICAL CAUSTICS ─── */
 body {
     font-family: var(--font-body);
     background-color: var(--theme-bg);
@@ -30,7 +30,20 @@ body {
     overflow-x: hidden;
     position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
-    background-image: linear-gradient(180deg, var(--theme-bg) 0%, var(--theme-bg-subtle) 100%);
+    background-image: 
+        radial-gradient(at 12% 18%, rgba(56, 189, 248, 0.12) 0px, transparent 48%),
+        radial-gradient(at 88% 12%, rgba(52, 211, 153, 0.10) 0px, transparent 45%),
+        radial-gradient(at 50% 65%, rgba(224, 242, 254, 0.50) 0px, transparent 65%),
+        radial-gradient(at 80% 88%, rgba(186, 230, 253, 0.25) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+[data-theme="dark"] body {
+    background-color: #030712;
+    background-image: 
+        radial-gradient(at 15% 25%, rgba(14, 165, 233, 0.18) 0px, transparent 50%),
+        radial-gradient(at 85% 15%, rgba(16, 185, 129, 0.14) 0px, transparent 50%),
+        radial-gradient(at 50% 70%, rgba(30, 58, 138, 0.22) 0px, transparent 65%);
     background-attachment: fixed;
 }
 
@@ -376,6 +389,22 @@ body {
 }
 
 .phone-view.active {
+    display: flex;
+}
+
+#phoneViewKyant0 {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 10px;
+    border-radius: 32px;
+    background: url('../assets/kyant0/homescreen.png') center top / cover no-repeat;
+    min-height: 640px;
+    position: relative;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+#phoneViewKyant0.active {
     display: flex;
 }
 

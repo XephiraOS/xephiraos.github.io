@@ -117,8 +117,8 @@ function initKyantBackdropControls() {
     const radiusSlider = document.getElementById('sliderRadius');
     const blurSlider = document.getElementById('sliderBlur');
     const refractionSlider = document.getElementById('sliderRefraction');
+    const amountSlider = document.getElementById('sliderAmount');
     const toggle = document.getElementById('demoToggle');
-    const toggleThumb = document.getElementById('demoToggleThumb');
 
     if (radiusSlider && lens) {
         radiusSlider.addEventListener('input', (e) => {
@@ -153,17 +153,20 @@ function initKyantBackdropControls() {
         });
     }
 
-    if (toggle && toggleThumb) {
-        let active = true;
+    if (amountSlider && lens) {
+        amountSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const label = document.getElementById('labelAmount');
+            if (label) label.textContent = `${val} dp`;
+            // Simulate optical refraction magnification & tension
+            const scale = 1 + (Math.abs(val) / 600);
+            lens.style.transform = `scale(${scale})`;
+        });
+    }
+
+    if (toggle) {
         toggle.addEventListener('click', () => {
-            active = !active;
-            if (active) {
-                toggle.style.background = '#4ade80';
-                toggleThumb.style.transform = 'translateX(24px)';
-            } else {
-                toggle.style.background = 'rgba(255, 255, 255, 0.35)';
-                toggleThumb.style.transform = 'translateX(0px)';
-            }
+            toggle.classList.toggle('off');
         });
     }
 }
@@ -189,13 +192,17 @@ function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
 }
 
-/* ─── PHONE MOCKUP VIEW SWITCHER (SETTINGS HOME & ABOUT PHONE) ─── */
+/* ─── PHONE MOCKUP VIEW SWITCHER (KYANT0 CATALOG, SETTINGS HOME & ABOUT PHONE) ─── */
 function initPhoneViewSwitcher() {
+    const tabKyant0 = document.getElementById('phoneTabKyant0');
     const tabSettings = document.getElementById('phoneTabSettings');
     const tabAbout = document.getElementById('phoneTabAbout');
     const heroPhoneAboutCard = document.getElementById('heroPhoneAboutCard');
     const aboutBackBtn = document.getElementById('aboutBackBtn');
 
+    if (tabKyant0) {
+        tabKyant0.addEventListener('click', () => setPhoneView('kyant0'));
+    }
     if (tabSettings) {
         tabSettings.addEventListener('click', () => setPhoneView('settings'));
     }
@@ -208,25 +215,51 @@ function initPhoneViewSwitcher() {
     if (aboutBackBtn) {
         aboutBackBtn.addEventListener('click', () => setPhoneView('settings'));
     }
+
+    initKyantBottomTabs();
 }
 
 function setPhoneView(view) {
+    const kyant0View = document.getElementById('phoneViewKyant0');
     const settingsView = document.getElementById('phoneViewSettings');
     const aboutView = document.getElementById('phoneViewAbout');
+    
+    const tabKyant0 = document.getElementById('phoneTabKyant0');
     const tabSettings = document.getElementById('phoneTabSettings');
     const tabAbout = document.getElementById('phoneTabAbout');
 
-    if (!settingsView || !aboutView) return;
+    // Hide all views first
+    if (kyant0View) kyant0View.classList.remove('active');
+    if (settingsView) settingsView.classList.remove('active');
+    if (aboutView) aboutView.classList.remove('active');
 
-    if (view === 'about') {
-        settingsView.classList.remove('active');
-        aboutView.classList.add('active');
-        if (tabSettings) tabSettings.classList.remove('active');
+    // Unselect all tabs
+    if (tabKyant0) tabKyant0.classList.remove('active');
+    if (tabSettings) tabSettings.classList.remove('active');
+    if (tabAbout) tabAbout.classList.remove('active');
+
+    if (view === 'settings') {
+        if (settingsView) settingsView.classList.add('active');
+        if (tabSettings) tabSettings.classList.add('active');
+    } else if (view === 'about') {
+        if (aboutView) aboutView.classList.add('active');
         if (tabAbout) tabAbout.classList.add('active');
     } else {
-        aboutView.classList.remove('active');
-        settingsView.classList.add('active');
-        if (tabAbout) tabAbout.classList.remove('active');
-        if (tabSettings) tabSettings.classList.add('active');
+        // default: kyant0 catalog from README
+        if (kyant0View) kyant0View.classList.add('active');
+        if (tabKyant0) tabKyant0.classList.add('active');
     }
+}
+
+function initKyantBottomTabs() {
+    const tabs = document.querySelectorAll('.kyant-bottom-tab-item');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const parent = tab.parentElement;
+            if (parent) {
+                parent.querySelectorAll('.kyant-bottom-tab-item').forEach(t => t.classList.remove('active'));
+            }
+            tab.classList.add('active');
+        });
+    });
 }
