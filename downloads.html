@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads — XephiraOS Official Builds & GSI</title>
+    <meta name="description" content="Download official XephiraOS Android 16 builds with Kyant0 Liquid Glass UI for OnePlus, Google Pixel, Xiaomi, Nothing, and Universal Treble GSIs.">
+    <meta name="keywords" content="XephiraOS Download, Android 16 ROM, Custom ROM, OnePlus Nord CE 2 Lite, Pixel 9 Pro XL, OnePlus 11, POCO F5, Nothing Phone 2, GSI Treble">
+    <meta property="og:title" content="Downloads — XephiraOS Official Builds">
+    <meta property="og:description" content="Download official verified XephiraOS Android 16 ROMs, fastboot packages, and SHA-256 signatures.">
+    <meta property="og:image" content="assets/xephira_banner_horizontal.png">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/xephira_x_logo_96.png">
+
+    <!-- Google Fonts: Outfit, Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/liquid-glass.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- ─── FLOATING LIQUID GLASS NAVBAR ─── -->
+    <div class="navbar-wrapper">
+        <nav class="liquid-glass navbar" id="mainNavbar">
+            <a href="index.html" class="brand-link">
+                <img src="assets/xephira_x_vector_rendered_512.png" alt="XephiraOS Emblem" class="brand-logo">
+                <span class="brand-text">XephiraOS</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#features" class="nav-link">Features</a></li>
+                <li><a href="index.html#optics" class="nav-link">Liquid Optics</a></li>
+                <li><a href="index.html#devices" class="nav-link">Ecosystem</a></li>
+                <li><a href="downloads.html" class="nav-link active">Downloads</a></li>
+                <li><a href="https://github.com/XephiraOS/android" target="_blank" class="nav-link">Source</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://github.com/XephiraOS" target="_blank" class="liquid-btn" style="padding: 9px 18px; font-size: 13.5px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ─── DOWNLOAD HERO & SEARCH ─── -->
+    <header class="download-hero">
+        <div class="liquid-pill hero-pill-badge" style="margin-bottom: 16px;">
+            <span class="liquid-pill-dot"></span>
+            <span>XEPHIRAOS 1.0 OFFICIAL CHANNELS</span>
+        </div>
+
+        <h1 style="font-family: var(--font-heading); font-size: 48px; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 14px;">
+            Select Your Device
+        </h1>
+        <p style="font-size: 16px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            Every official build is compiled with Kyant0 Liquid Glass RuntimeShaders, signed with release keys, and cryptographically verified.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="download-search-box">
+            <div class="liquid-glass" style="display: flex; align-items: center; padding: 6px 16px; border-radius: 999px;">
+                <span style="font-size: 18px; margin-right: 10px; color: var(--text-muted);">🔍</span>
+                <input 
+                    type="text" 
+                    id="deviceSearchInput" 
+                    class="liquid-input" 
+                    placeholder="Search by device model, codename (e.g. oscar, komodo, marble), or SoC..." 
+                    style="border: none; background: transparent; padding: 10px 0; font-size: 15px; width: 100%; box-shadow: none;"
+                >
+            </div>
+        </div>
+
+        <!-- OEM Brand Filters -->
+        <div class="brand-filter-bar">
+            <button class="filter-btn active" data-brand="all">All Devices</button>
+            <button class="filter-btn" data-brand="oneplus">OnePlus</button>
+            <button class="filter-btn" data-brand="google">Google Pixel</button>
+            <button class="filter-btn" data-brand="xiaomi">Xiaomi / POCO</button>
+            <button class="filter-btn" data-brand="nothing">Nothing</button>
+            <button class="filter-btn" data-brand="generic">Universal GSI</button>
+        </div>
+    </header>
+
+    <!-- ─── DEVICE CARDS GRID ─── -->
+    <main style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+        <div class="devices-grid" id="devicesContainer">
+            <!-- Populated dynamically via downloads.js -->
+        </div>
+    </main>
+
+    <!-- ─── INSTALLATION GUIDES ─── -->
+    <section class="guide-section">
+        <div class="section-badge-center">
+            <div class="liquid-pill">
+                <span>INSTALLATION PROTOCOLS</span>
+            </div>
+            <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: #ffffff; margin-top: 12px;">
+                How to Flash XephiraOS
+            </h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 8px auto 0;">
+                Follow the recommended procedure for your installation type to ensure a pristine optical experience.
+            </p>
+        </div>
+
+        <div class="guide-grid">
+            <!-- Clean Recovery Flash -->
+            <div class="liquid-glass guide-card">
+                <h3><span>📦</span> Recovery Sideload</h3>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+                    Recommended for clean upgrades and migrations from stock or other custom ROMs.
+                </p>
+                <ol class="guide-steps">
+                    <li>Reboot phone to Xephira Recovery or TWRP:
+                        <span class="guide-code">adb reboot recovery</span>
+                    </li>
+                    <li>Wipe Dalvik/ART Cache, Data, and System partitions.</li>
+                    <li>Select <em>Apply update from ADB</em> and sideload:
+                        <span class="guide-code">adb sideload XephiraOS-1.0-*.zip</span>
+                    </li>
+                    <li>Reboot to System and experience Pure Liquid Glass.</li>
+                </ol>
+            </div>
+
+            <!-- Fastboot Flashing -->
+            <div class="liquid-glass guide-card">
+                <h3><span>⚡</span> Fastboot Factory Flash</h3>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+                    Ideal for Google Pixel, OnePlus, and partitioned A/B devices directly from terminal.
+                </p>
+                <ol class="guide-steps">
+                    <li>Reboot device into bootloader mode:
+                        <span class="guide-code">adb reboot bootloader</span>
+                    </li>
+                    <li>Extract the downloaded Fastboot ROM archive.</li>
+                    <li>Run the automated installer script:
+                        <span class="guide-code">./flash-all.sh  # Linux / macOS<br>flash-all.bat   # Windows</span>
+                    </li>
+                    <li>Wait for partitions to flash and device to auto-boot.</li>
+                </ol>
+            </div>
+
+            <!-- Generic System Image -->
+            <div class="liquid-glass guide-card">
+                <h3><span>🌐</span> Universal GSI (Treble)</h3>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+                    Compatible with any Android device with Project Treble v2.0+ support.
+                </p>
+                <ol class="guide-steps">
+                    <li>Reboot into Fastbootd mode:
+                        <span class="guide-code">fastboot reboot fastboot</span>
+                    </li>
+                    <li>Erase and flash system image:
+                        <span class="guide-code">fastboot erase system<br>fastboot flash system system.img</span>
+                    </li>
+                    <li>Wipe userdata partition to prevent bootloops:
+                        <span class="guide-code">fastboot -w</span>
+                    </li>
+                    <li>Reboot system: <span class="guide-code">fastboot reboot</span></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── DOWNLOAD DRAWER / MODAL ─── -->
+    <div class="modal-backdrop" id="downloadModalBackdrop">
+        <div class="liquid-glass download-modal" style="position: relative;">
+            <button class="modal-close-btn" onclick="closeDownloadModal()" aria-label="Close modal">✕</button>
+
+            <!-- Header -->
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-right: 40px; margin-bottom: 12px;">
+                <div>
+                    <h2 id="modalDeviceName" style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: #ffffff;">
+                        Device Name
+                    </h2>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                        <span id="modalCodename" class="device-codename">codename</span>
+                        <span id="modalVersion" style="font-size: 13px; color: var(--text-secondary);">XephiraOS 1.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flavor Toggle (GApps vs Vanilla) -->
+            <div class="flavor-toggle-bar">
+                <button class="tab-btn active" id="flavorGappsBtn" onclick="setFlavor('gapps')">
+                    <span>✨</span> Google Apps (GApps)
+                </button>
+                <button class="tab-btn" id="flavorVanillaBtn" onclick="setFlavor('vanilla')">
+                    <span>🌱</span> Pure Vanilla (MicroG Ready)
+                </button>
+            </div>
+
+            <!-- Meta Grid -->
+            <div class="modal-meta-grid">
+                <div class="modal-meta-card">
+                    <span class="modal-meta-label">Release Channel</span>
+                    <span class="modal-meta-val" style="color: #4ade80;">Official • Stable</span>
+                </div>
+                <div class="modal-meta-card">
+                    <span class="modal-meta-label">Package Size</span>
+                    <span class="modal-meta-val" id="modalFileSize">1.85 GB</span>
+                </div>
+                <div class="modal-meta-card">
+                    <span class="modal-meta-label">Build Timestamp</span>
+                    <span class="modal-meta-val" id="modalBuildDate">2026-09-14</span>
+                </div>
+                <div class="modal-meta-card">
+                    <span class="modal-meta-label">Device Maintainer</span>
+                    <span class="modal-meta-val" id="modalMaintainer">Xephira Team</span>
+                </div>
+            </div>
+
+            <!-- SHA-256 Checksum -->
+            <div style="margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); font-weight: 600;">
+                        SHA-256 Checksum
+                    </span>
+                    <button class="liquid-btn" id="copyShaBtn" onclick="copyChecksum()" style="padding: 4px 12px; font-size: 11px; border-radius: 6px;">
+                        Copy Hash
+                    </button>
+                </div>
+                <div class="checksum-container" style="margin-top: 0;">
+                    <span class="checksum-text" id="modalShaChecksum">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 24px 0 20px;">
+                <a href="#" id="modalDownloadLink" class="liquid-btn liquid-btn-primary" style="padding: 14px; text-align: center; font-size: 15px; justify-content: center;">
+                    Download Official ROM (.zip) ↓
+                </a>
+                <a href="#" id="modalFastbootLink" class="liquid-btn" style="padding: 12px; text-align: center; font-size: 13.5px; justify-content: center;">
+                    Download Fastboot Package (.zip) ⚡
+                </a>
+            </div>
+
+            <!-- Changelog Section -->
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
+                <h4 style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px;">
+                    Build Changelog & Optimizations
+                </h4>
+                <ul id="modalChangelogList" style="list-style: none; font-size: 13.5px; color: var(--text-secondary); line-height: 1.55;">
+                    <!-- Populated via downloads.js -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/xephira_x_vector_rendered_512.png" alt="Xephira Logo" style="width: 30px; height: 30px;">
+                    <span style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #ffffff;">XephiraOS</span>
+                </div>
+                <p>
+                    A pure liquid glass Android operating system built for privacy, performance, and aesthetic perfection.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#optics">Liquid Optics</a></li>
+                    <li><a href="index.html#devices">Devices</a></li>
+                    <li><a href="downloads.html">Download Portal</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Source & Builds</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/XephiraOS/android" target="_blank">Manifest Repository</a></li>
+                    <li><a href="https://github.com/XephiraOS/android_packages_apps_Settings" target="_blank">Settings Repository</a></li>
+                    <li><a href="https://github.com/XephiraOS/android_vendor_lineage" target="_blank">Vendor Repository</a></li>
+                    <li><a href="https://github.com/Kyant0/AndroidLiquidGlass" target="_blank">Kyant0 Optics Engine</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/XephiraOS" target="_blank">GitHub Organization</a></li>
+                    <li><a href="downloads.html">Release Notes</a></li>
+                    <li><a href="downloads.html">Installation Guides</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 XephiraOS Project. Distributed under Apache 2.0 License.</span>
+            <span>Inspired by Kyant0 Pure Liquid Glass.</span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/downloads.js"></script>
+</body>
+</html>

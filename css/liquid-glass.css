@@ -1,0 +1,214 @@
+/*
+ * XephiraOS - Kyant0 Pure Liquid Glass Design System
+ * Inspired by Kyant0/AndroidLiquidGlass
+ * Physical optical refraction, meniscus curvature, and specular highlights
+ */
+
+:root {
+    --glass-bg-top: rgba(255, 255, 255, 0.10);
+    --glass-bg-mid: rgba(255, 255, 255, 0.045);
+    --glass-bg-bottom: rgba(255, 255, 255, 0.015);
+    
+    --glass-border-outer: rgba(255, 255, 255, 0.18);
+    --glass-border-highlight: rgba(255, 255, 255, 0.60);
+    --glass-border-subtle: rgba(255, 255, 255, 0.08);
+
+    --glass-blur-heavy: 32px;
+    --glass-blur-std: 24px;
+    --glass-blur-light: 16px;
+
+    --glass-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.1);
+    --glass-shadow-hover: 0 28px 56px -12px rgba(0, 0, 0, 0.7), 0 0 2px 1px rgba(255, 255, 255, 0.25);
+    --glass-shadow-active: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+
+    --accent-glow: rgba(56, 189, 248, 0.25);
+    --accent-purple-glow: rgba(168, 85, 247, 0.25);
+}
+
+/* ─── BASE PURE LIQUID GLASS SURFACE ─── */
+.liquid-glass {
+    position: relative;
+    background: linear-gradient(175deg, var(--glass-bg-top) 0%, var(--glass-bg-mid) 40%, var(--glass-bg-bottom) 100%);
+    backdrop-filter: blur(var(--glass-blur-std)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur-std)) saturate(160%);
+    border: 1px solid var(--glass-border-outer);
+    border-radius: 26px;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.28s ease, 
+                border-color 0.28s ease;
+    overflow: hidden;
+}
+
+/* Kyant0 Dynamic Specular Rim Sweep */
+.liquid-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -160%;
+    width: 140%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.0) 25%, 
+        rgba(255, 255, 255, 0.24) 50%, 
+        rgba(255, 255, 255, 0.0) 75%, 
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: liquidSheenSweep 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+@keyframes liquidSheenSweep {
+    0% { left: -160%; opacity: 0; }
+    10% { opacity: 1; }
+    40% { left: 200%; opacity: 0; }
+    100% { left: 200%; opacity: 0; }
+}
+
+/* Kyant0 Interactive Hover State */
+.liquid-glass:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: var(--glass-shadow-hover);
+    transform: translateY(-4px);
+}
+
+.liquid-glass:active {
+    transform: scale(0.985);
+    box-shadow: var(--glass-shadow-active);
+}
+
+/* ─── VARIANT: HEAVY GLASS (Navigation, Modals, Hero) ─── */
+.liquid-glass-heavy {
+    background: linear-gradient(175deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(var(--glass-blur-heavy)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+/* ─── VARIANT: SUBTLE GLASS (Tiles, Nested Containers) ─── */
+.liquid-glass-subtle {
+    background: linear-gradient(175deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(var(--glass-blur-light));
+    -webkit-backdrop-filter: blur(var(--glass-blur-light));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+}
+
+/* ─── LIQUID GLASS BUTTONS ─── */
+.liquid-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 26px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 999px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+.liquid-btn:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 100%);
+    border-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.liquid-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.liquid-btn-primary {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 225, 235, 0.9) 100%);
+    color: #05070d;
+    border: 1px solid #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+}
+
+.liquid-btn-primary:hover {
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+    color: #000000;
+}
+
+/* ─── LIQUID GLASS PILLS & BADGES ─── */
+.liquid-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    letter-spacing: 0.5px;
+}
+
+.liquid-pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 8px #38bdf8;
+}
+
+.liquid-pill-green .liquid-pill-dot {
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+}
+
+/* ─── LIQUID GLASS SEARCH & INPUTS ─── */
+.liquid-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 999px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 18px;
+    transition: all 0.25s ease;
+}
+
+.liquid-input-wrapper:focus-within {
+    border-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 100%);
+}
+
+.liquid-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14.5px;
+    padding-left: 10px;
+}
+
+.liquid-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
